@@ -7,26 +7,28 @@ codes = ""
 with open(sys.argv[1]) as f:
     codes = f.read()
 
-zeros = 0
 current = 50
+crosses = 0
+zeros = 0
 for c in codes.split():
     d = c[0]
-    v = int(c[1::]) % 100
+    v = int(c[1::])
 
-    if d == "L":
-        v *= -1
-
-    n = current + v
-    print(f"pre: {d}, {v}, {current}, {n}")
-    if n < 0:
-        n = 100 + n
-    if n > 100:
-        n = n - 100
-    if n == 100:
-        n = 0
-    print(f"post: {n}")
-    current = n
-    if n == 0:
+    if d == "R":
+        for n in range(0, v):
+            current -= 1
+            if current < 0:
+                current = 99
+            elif current == 0:
+                crosses += 1
+    else:
+        for n in range(0, v):
+            current += 1
+            if current > 99:
+                current = 0
+                crosses += 1
+    if current == 0:
         zeros += 1
 
-print(zeros)
+print(f"Part 1: {zeros}")
+print(f"Part 2: {crosses}")
