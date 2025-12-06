@@ -1,6 +1,6 @@
 import sys
-from functools import reduce
 import operator
+from functools import reduce
 
 if len(sys.argv) != 2:
     sys.exit(1)
@@ -15,16 +15,6 @@ eles = len(matrix[0])
 rows = len(matrix)
 total = 0
 
-
-def calc_nums(col, op):
-    if op == "+":
-        return sum(col)
-    prod = 1
-    for v in col:
-        prod *= v
-    return prod
-
-
 for e in range(eles):
     exp = ""
     for r in range(rows - 2):
@@ -34,12 +24,13 @@ for e in range(eles):
     total += eval(exp)
 
 print(f"Part 1: {total}")
+
 lines = input
 max_len = max(len(line) for line in lines)
 
 nums = []
 cur_op = ""
-ans = 0
+total = 0
 
 for x in range(max_len):
     cur_num = 0
@@ -52,9 +43,9 @@ for x in range(max_len):
     if cur_num:
         nums.append(cur_num)
     else:
-        ans += calc_nums(nums, cur_op)
+        total += calc_nums(nums, cur_op)
         nums = []
 
-ans += sum(nums) if cur_op == "+" else eval("*".join(map(str, nums)))
+total += sum(nums) if cur_op == "+" else eval("*".join(map(str, nums)))
 
 print(f"Part 2: {ans}")
