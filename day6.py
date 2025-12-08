@@ -20,7 +20,6 @@ for e in range(eles):
     for r in range(rows - 2):
         exp += matrix[r][e] + matrix[-1][e]
     exp += matrix[-2][e]
-    # print(sum([int(line[e]) for line in matrix if line[e].isdigit()]))
     total += eval(exp)
 
 print(f"Part 1: {total}")
@@ -43,9 +42,9 @@ for x in range(max_len):
     if cur_num:
         nums.append(cur_num)
     else:
-        total += calc_nums(nums, cur_op)
+        total += sum(nums) if cur_op == "+" else eval("*".join(map(str, nums)))
         nums = []
 
 total += sum(nums) if cur_op == "+" else eval("*".join(map(str, nums)))
 
-print(f"Part 2: {ans}")
+print(f"Part 2: {total}")
